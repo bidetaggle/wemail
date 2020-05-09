@@ -81,6 +81,9 @@ class Mailbox extends React.Component {
 					email={currentEmail}
 					onDelete={(id) => { this.deleteMessage(id); }}
         />
+        <footer>
+          <a href="https://github.com/bidetaggle" target="_blank">Made by bidetaggle</a>
+        </footer>
 			</main>
 		)
 	}
