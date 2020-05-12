@@ -1,0 +1,7 @@
+#composer {
+  padding: 10px;
+}
+#composer .standard-basic, #composer .standard-multiline-static {
+  margin-bottom: 10px;
+  width: 100%;
+}
