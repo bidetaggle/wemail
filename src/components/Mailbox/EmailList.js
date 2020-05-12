@@ -1,0 +1,30 @@
+import React from 'react';
+import EmailListItem from './EmailListItem'
+
+/* EmailList contains a list of Email components */
+const EmailList = ({ emails, onEmailSelected, selectedEmailId }) => {
+	if (emails.length === 0) {
+		return (
+			<div className="email-list empty">
+				Nothing to see here, great job!
+			</div>
+		);
+	}
+
+	return (
+		<div className="email-list">
+			{
+				emails.map(email => {
+					return (
+						<EmailListItem
+              key={email.id}
+							onEmailClicked={(id) => { onEmailSelected(id); }}
+							email={email}
+							selected={selectedEmailId === email.id} />
+					);
+				})
+			}
+		</div>
+	);
+};
+export default EmailList

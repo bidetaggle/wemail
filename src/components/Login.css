@@ -1,0 +1,79 @@
+/*
+Photo by <a href="https://unsplash.com/@tianshu" target="_blank">Tianshu Liu</a>
+
+https://reactjsexample.com/inbox-built-upon-react-and-es6/
+*/
+
+#login {
+  background-image: url(./../assets/background.jpg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.drop-zone {
+  background-color: white;
+  border: 2px dashed black;
+  border-radius: 5px;
+  padding: 50px;
+  text-align: center;
+  font-size: 1.5em;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  opacity: 0.9;
+}
+.drop-zone:hover {
+  opacity: 0.8;
+  cursor: pointer;
+  animation: shake 0.3s;
+}
+
+@keyframes shake {
+  10%, 90% {
+    transform: rotate(2deg);
+  }
+
+  20%, 80% {
+    transform: rotate(-2deg);
+  }
+
+  30%, 50%, 70% {
+    transform: rotate(2deg);
+  }
+
+  40%, 60% {
+    transform: rotate(-2deg);
+  }
+}
+
+#login h1 {
+  text-align: center;
+  font-size: 2rem;
+}
+
+#login aside {
+  background-color: white;
+  opacity: 0.9;
+  border-radius: 0px 0px 5px 5px;
+}
+#login aside ul {
+  padding: 15px;
+  margin: 0;
+  list-style: none;
+  text-align: center;
+}
+#login aside button {
+  width: 100%;
+  padding: 10px;
+  background-color: green;
+  border-radius: 0px 0px 5px 5px;
+  border: 0;
+  color: white;
+}
+#login aside button:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}

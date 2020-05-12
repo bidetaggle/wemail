@@ -1,28 +1,21 @@
-import React, {useState, useEffect} from 'react';
-import logo from './logo.svg';
+import React, {useState} from 'react';
 import './App.css';
-
-import $ from "jquery"
-import Mailbox from './Mailbox'
+import Mailbox from './components/Mailbox/Mailbox'
+import Login from './components/Login'
 
 function App() {
-  const [S_emailsList, setEmailsList] = useState([])
-  const [S_loading, setLoading] = useState(true)
+  // const [S_user, setUser] = useState(null)
 
-  useEffect(() => {
-    $.ajax({url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/311743/dummy-emails.json',
-    	type: 'GET',
-    	success: function(result) {
-    		setEmailsList(result)
-        setLoading(false)
-        console.log(result);
-    	}
-    });
-  }, []);
+  const [S_user, setUser] = useState({
+    jwk: {"kty":"RSA","e":"AQAB","n":"whB0rosk8D94GFz3DLyagsLwc88E5O6Yj2unXTFDB43UM8RQqNJOYdcaXiX0cSn9WJjRzMP7JLv9ZBswhvqqGa2xZYm197AkTr9x_1t5TCvfDNanStzDL4iIRJvmkE4rX1fiM31_EA9GeHQWNaYGlSGGOsRDgzEXQay0rAPOLpgclRiFFqPSgpxjXhUkRggJoV2xcrF4nbzJHAMm2Wju0RgpmY3l3Rm-DTdqan30sY1sqehr8SdQ2B82ZbKMmGJNkC_9CJ9QHZkq6NCmDM9AOaCI4NIjLRKwsp9mEhiE3ZF_U67IC5949zx43jZb2bZhRVAJ_2ZOxmKMGk3ECdW_iYR3Oz4QsEWgwwJ93GKUhJiLmjWFQRGL6BQVS9pdRLrg50OjUPZ_a2ya8tXUh3wJRx3ICx1lBJywSaEX_OdW-p378p9BGwEtmsS3KfjFKBU6U9Nva7xsrja9n6rq4Igw-RFh7xassP2njEREMbz2Tr2y2aH_ZBaVo5bXkYYoYoQBnGqR9knRaPdIMLSgNY0UN5I7xqfTbGaezkjU-nTfebOUqFv9i9nfPXl5i6YnwYwZn772x9n2YMjqqpR56QFNUci816B_czKjozeytJ9_92WlYzAUt39dPSzDWvNVGRhO4-nQNrwy34GE0yXeyyJUXF48J9lEYZ3J_PvnB7X1Z70","d":"Jl0h7_JubDcj2u8f4Kr1QZXfeolpnodDbhDaXmwzY84oLc6oomMm3yUqn4OR0gA6xvW4_emdX5rxQgW0_24Uy-xAJkJF0JAH8XBbzR8seMAwgUV6_2vqgx5Sz_tg5lSpsti5DTRJNufKJtxOGq92XCtrMXlknk4JWrCVa-75ptDnz5qwDrR2lF7trubvi4-htb6DqpiGb2pneGvwFWku0vObn7FDSIUDAvJaTXCWe7YpTeJ2Wk9LJlpvQsX8ENDYJAG0nCyAZkWGC83Zka0z9WB0xrsL_KhV-Y3U3A1wUKvnd6fVAKU3QOr5uvYUjNLG4nCq9UwolQPczgNjFo2kpiZZUdcwcWPrpvI5XN8ikpT0i_n-hsZE2IX-bA53scB08ua7QITNACwD_bzrmyG-qWV77YH9U5u2qtyQOpOf9CK6JeIyF2GfLBANuSbWZm1k0nNHsaHiGoUo5gNBNk1GRPlea-cbNYH-W5eRJk9xMoUrU7QWE69HGkzEppjGHz2GKu_Eo5AOqjTHQiPi-6CcaUNxR8aSpsDCjXNPy0DJ8CyrsDZG1lkmoLy-eldFB2v1ax9R5ueLogK-nvYkAnJdB5LAl6R0kqnLjE8GLwnmfWEs9G2qdfkujG81JblUHGZAVn9m_3Yze-mC1CL7ykfC8lVtvewzWski_bWy-D2p6wE","p":"-_hF_lt5lcswgUX8XlCpIewlqbgeSuUAHPZ0bFS4gDgxuC9UjoGhC4pQewZz0lF-qZGNqloWAY14ht8mu5s5KyAcIgL_67VyXdwMXJoDmpg4bskDmWboozpOH_VFARl_1HSswVYFNTDBu-6-zfodtJkm-4ptxli-FrGlpapANORAB2psnYzg59Q3tZ-myyHZzWFQlHwQW0CcFtMKhqeAc5IAPcU4o-IJ5X39ksMdRV1BwQfA3uSVNxiUM0L29HyteHXNeK5CcsoEnld0b4imNz4RnN2OqUMh-duAilvejbIKRaE6Tn3BJt-q4AK_did6pFp5-IjG0EH8n_H9lebLAQ","q":"xSsUcGymZTOYizNbrVBvVWJ-T7tvk1lMsWAOlfy6KsnChK1tUPdVq0EFNqw6Rq6d4k_K1ZyT8D1tMEWbv-elebWvVDAKV-KZVUdxhJCQKG2ypUuoY3GmqsRChwcaf3zf8MfKI-rsv56M9pZfFpLBV6C_Q3NzPHzJmkVwyUQVx1Gitn-xiLIsD5oXJ_2v8mbAqyFnVTdVLgFgVOhzd-UDiaWpHxz4a72RaKzgKrtT_Q44NPk2vZtNCCImLB8KJjx0y8-f861iPWczIBZSvCjeWuuTxvA1xWZXXx24FpHNd2gaHfOzPXh0V8Z2zlmm5dMF8qY4fgsLGgFUAzQbu7mIvQ","dp":"aTq0sJevXXmwVizOSu1Q1VP0Hr9AF3Mv6uiakquHKjVNvmg13hYRFeq71cVKFannRhX9nglla1yT22_Sk0MuSu5sEWBDVUM_8ib2Gq5Plv6_grT8hdJOkezFt98M5HqrwiTACTZNkns8TapVkVxFj6jueNrFIbLqIDwsu9UwX2Z7vx0ZI2s0el1MrtNwKyGF_poHtxthEVsYVQfqO3Y01Q9CfomhMAA0td06S1KlJNTfoygDypKYJpxjOE1dKZnwMICyQRY1tg7cguxvOi1NjYCkhmiZLeNViy26rw3TEkYquA2vdhxa0EtU55z-LPAr7fvDOKKWtV75jCraBwKOAQ","dq":"VhUR7mexWjvlnNjGbOvSP-Apr5vxAc8aKdL7a0aU7Tt7XrvtH01tLMDNiuo040k3i2g08YBUIq5e7pVlg6qaV4IYU1RKH8bCFTaE_FC1b8E9HufiU9B56NKZDSTvz7twdkp0Gaxmwt5xQvOx_kQCf8Sh3MwaAs2ko2Mv899y9rvQo4cqtri7ffBTrdUXrWhpNA34dH8dBGH7cfau-yiUm9Mk_H2EhF2Wj7HyiRWSfMhph89KtAuK3UMzkU3X-4unnpg-iIAphQ96hcbZRmc9dUqnEVMs1stw2Ak8pzXvE_PyeyM8HVlqyivPERaZRHwWe7NQtM8TgL4VtPRaK2K8rQ","qi":"7bdS5cGXegnXNNRuNBndi7iCghyJZmdEy6OrCuhMs7MAoc6ALMupoOlooonOUseavhhz8vTd9L9T9hVcJvw0F6yBWPqIraeIz33pNmLPaVfkh-lOtwolAGsgbxK2GcnQE3PXPBv3rayEPoZVF1RyWlrSv3haOe4dAgIdg428vWqWj4VaGk3iLeRbsHj3GhfzzyesL7A69C074cc3XHbTIWu9VCYpcrH1vIPR0o_dTGIzRbqRC4wch7z-bZDa3ISG6B1nKmGYI-fBcy8M5vl_ED5FBQ0vWFRYcJ2gIpI_Fgum9-3Wd47qxI6yZvUw1x53u0uj5Py_sTaCywy5ktBdTg"},
+    address: "AOvWwnkMZTItUjTEy4MNB5RJatrMf52f2RNEX8zwq5w",
+    balance: 0.999925459721
+  })
 
-  return (
-    !S_loading && <Mailbox emails={S_emailsList} />
-  );
+  if(!S_user)
+    return <Login setUser={setUser} />
+  else
+    return <Mailbox user={S_user} />
 }
 
 export default App;
