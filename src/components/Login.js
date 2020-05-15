@@ -2,14 +2,13 @@ import React, {useState, useCallback} from 'react';
 import './Login.css';
 
 import Dropzone from 'react-dropzone'
-import Arweave from 'arweave/web'
+import { arweave } from './../lib/arweave-helper'
 
 function Login(props) {
   const [S_loading, setLoading] = useState(false)
 
   const onDrop = useCallback((acceptedFiles) => {
     setLoading(true)
-    const arweave = Arweave.init();
 
     acceptedFiles.forEach((file) => {
       const reader = new FileReader()
@@ -21,9 +20,9 @@ function Login(props) {
           let jwk = JSON.parse(reader.result);
           arweave.wallets.jwkToAddress(jwk).then((address) => {
             arweave.wallets.getBalance(address).then((balance) => {
-              console.log(JSON.stringify(jwk));
-              console.log(address);
-              console.log(arweave.ar.winstonToAr(balance));
+              // console.log(JSON.stringify(jwk));
+              // console.log(address);
+              // console.log(arweave.ar.winstonToAr(balance));
               props.setUser({
                 jwk: jwk,
                 address: address,

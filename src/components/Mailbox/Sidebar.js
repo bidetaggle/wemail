@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Sidebar = ({ emails, setSidebarSection, handleComposeClick }) => {
+const Sidebar = ({ emails, setSidebarSection, handleComposeClick, selectedSection }) => {
 	var unreadCount = emails.reduce(
 		function(previous, msg) {
-			if (msg.read !== "true" ) {
+			if (msg.read === false ) {
 				return previous + 1;
 			}
 			else {
@@ -21,6 +21,8 @@ const Sidebar = ({ emails, setSidebarSection, handleComposeClick }) => {
 			}
 		}, 0);
 
+	const isSelected = (sectionName) => selectedSection === sectionName ? 'selected' : 'test'
+
 	return (
 		<div id="sidebar">
 			<div className="sidebar__compose">
@@ -30,26 +32,25 @@ const Sidebar = ({ emails, setSidebarSection, handleComposeClick }) => {
 			</div>
 			<ul className="sidebar__inboxes">
 				<li onClick={() => { setSidebarSection('inbox'); }}>
-          <div>
+          <div className={isSelected('inbox')}>
 					  <span className="fa fa-inbox"></span> Inbox
 					  <span className="item-count">{unreadCount}</span>
           </div>
         </li>
 				<li onClick={() => { setSidebarSection('sent'); }}>
-          <div>
+          <div className={isSelected('sent')}>
   					<span className="fa fa-paper-plane"></span> Sent
-  					<span className="item-count">0</span>
           </div>
         </li>
 				<li onClick={() => { setSidebarSection('drafts'); }}>
-          <div>
-  					<span className="fa fa-pencil-square-o"></span> Drafts
+          <div className={isSelected('drafts')}>
+  					<span className="fa fa-pencil-ruler"></span> Drafts
   					<span className="item-count">0</span>
 					</div>
         </li>
 				<li onClick={() => { setSidebarSection('deleted'); }}>
-          <div>
-					  <span className="fa fa-trash-o"></span> Trash
+          <div className={isSelected('deleted')}>
+					  <span className="fa fa-trash"></span> Trash
 					  <span className="item-count">{deletedCount}</span>
 					</div>
         </li>

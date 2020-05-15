@@ -63,6 +63,10 @@
 #sidebar .sidebar__inboxes li div:hover {
   background: #404549;
 }
+#sidebar .sidebar__inboxes li div.selected {
+  background: #404549;
+  color: #009fc4;
+}
 #sidebar .sidebar__inboxes .fa {
   margin-right: 10px;
 }

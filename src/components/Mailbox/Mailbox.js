@@ -7,7 +7,6 @@ import LoadingScreen from './../LoadingScreen'
 import './Mailbox.css';
 import $ from "jquery"
 import refreshInbox from './../../lib/refreshInbox'
-import Arweave from 'arweave/web'
 
 class Mailbox extends React.Component {
 	constructor(props) {
@@ -34,18 +33,7 @@ class Mailbox extends React.Component {
 	}
 
 	componentDidMount = async () => {
-		const arweave = Arweave.init();
-
-		// let that = this;
-		// $.ajax({url: 'https://s3-us-west-2.amazonaws.com/s.cdpn.io/311743/dummy-emails.json',
-    // 	type: 'GET',
-    // 	success: function(result) {
-		// 		// that.setEmails(result)
-    //     console.log(result);
-    // 	}
-    // });
-
-		let inbox = await refreshInbox(arweave, this.props.user)
+		let inbox = await refreshInbox(this.props.user)
 		console.log(inbox);
 		this.setEmails(inbox)
 	}
@@ -56,7 +44,8 @@ class Mailbox extends React.Component {
 		emails[index].read = 'true';
 		this.setState({
 			selectedEmailId: id,
-			emails
+			emails,
+			composeMode: false
 		});
 	}
 
@@ -110,6 +99,7 @@ class Mailbox extends React.Component {
 						emails={this.state.emails}
 						setSidebarSection={(section) => { this.setSidebarSection(section); }}
 						handleComposeClick={() => this.setState({composeMode: true})}
+						selectedSection={this.state.currentSection}
 	        />
 					<EmailList
 						emails={this.state.emails.filter(x => x.tag === this.state.currentSection)}
@@ -118,7 +108,7 @@ class Mailbox extends React.Component {
 						currentSection={this.state.currentSection}
 	        />
 					<div className="email-content">
-						{this.state.composeMode && <Composer />}
+						{this.state.composeMode && <Composer user={this.props.user}/>}
 						{!this.state.composeMode && <EmailDetails
 							email={currentEmail}
 							onDelete={(id) => { this.deleteMessage(id); }}
